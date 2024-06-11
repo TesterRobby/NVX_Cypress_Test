@@ -1,3 +1,8 @@
+describe('template spec', () => {
+  it('passes', () => {
+    cy.visit('https://example.cypress.io')
+  })
+})
 describe("Login Test IDO Issuer", () => {
   it("Successfully visit login page of IDO Issuer website", () => {
     cy.visit("https://dev-ido.nvx.co.id/");

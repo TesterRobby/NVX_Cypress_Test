@@ -1,5 +1,5 @@
-describe("Login Test IDO Investor", () => {
-  it.skip("Successfully visit login page of IDO Investor website", () => {
+describe.skip("Login Test IDO Investor", () => {
+  it("Successfully visit login page of IDO Investor website", () => {
     cy.visit("https://dev-ido.nvx.co.id/");
     cy.get('a[href="/login"]').contains("Login as Investor").click();
     cy.get(".text-xl").contains("Login");
@@ -23,7 +23,7 @@ describe("Login Test IDO Investor", () => {
       .and("not.be.disabled");
   });
 
-  it.skip("Succesfully login to investor website as an investor", () => {
+  it("Succesfully login to investor website as an investor", () => {
     cy.visit("https://dev-ido.nvx.co.id/");
     cy.get('a[href="/login"]').contains("Login as Investor").click();
     cy.get(".text-xl").contains("Login");
@@ -43,7 +43,7 @@ describe("Login Test IDO Investor", () => {
     cy.get("h1.text-xl.font-medium").should("contain.text", "Your portfolio");
   });
 
-  it.skip("User input a wrong email and password", () => {
+  it("User input a wrong email and password", () => {
     cy.visit("https://dev-ido.nvx.co.id/");
     cy.get('a[href="/login"]').contains("Login as Investor").click();
     cy.get(".text-xl").contains("Login");
@@ -57,7 +57,7 @@ describe("Login Test IDO Investor", () => {
       .and("contain.text", "Invalid Email / Password")
   })
 
-  it.skip("User login with blank space in field", () => {
+  it("User login with blank space in field", () => {
     cy.visit("https://dev-ido.nvx.co.id/");
     cy.get('a[href="/login"]').contains("Login as Investor").click();
     cy.get('button[class*="w-[436px] h-[40px] flex"]').click();
@@ -68,15 +68,13 @@ describe("Login Test IDO Investor", () => {
     cy.loginInvestor("robby", "1234567890");
     cy.get(".text-red-500").should("contain", "Invalid email format");
   });
-
 })
 
-describe.skip("logout as an Investor", () => {
-  it.skip("Successfully visit login page of IDO Investor website", () => {
+describe("logout as an Investor", () => {
+  it("Successfully visit login page of IDO Investor website", () => {
     cy.loginInvestor("alice.johnson@example.com", "password789");
-    cy.get('.w-6 > .w-full')
-      .should("be.enable")
-      .and("be.visible");
-    cy.get('h1[class="text-[#D64949] text-sm font-medium"]').contains("Logout").click();
+    cy.get('.w-6 > .w-full').click();
+    cy.contains("h1", "Logout").click();
+    cy.url().should("contain", "dev-ido.nvx.co.id");
   })
 })

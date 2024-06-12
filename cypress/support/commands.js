@@ -10,7 +10,17 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('loginInvestor', (email, password) => {
+    cy.visit("https://dev-ido.nvx.co.id/");
+    cy.get('a[href="/login"]').contains("Login as Investor").click();
+    cy.get(".text-xl").contains("Login");
+    cy.url().should("contain", "login");
+    cy.get('input[type="email"]').type(email);
+    cy.get('input[type="password"]').type(password);
+    cy.pause();
+    cy.get('button[class*="w-[436px] h-[40px] flex"]').click();
+})
+
 //
 //
 // -- This is a child command --

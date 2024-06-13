@@ -1,4 +1,4 @@
-describe.skip("Login Test IDO Investor", () => {
+describe("Login Test IDO Investor", () => {
   it("Successfully visit login page of IDO Investor website", () => {
     cy.visit("https://dev-ido.nvx.co.id/");
     cy.get('a[href="/login"]').contains("Login as Investor").click();

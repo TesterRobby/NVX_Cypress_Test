@@ -13,7 +13,6 @@ Cypress.Commands.add("loginIssuer", (email, password) => {
   cy.visit("https://dev-ido.nvx.co.id/issuer-login");
   cy.get('input[type="email"]').type(email);
   cy.get('input[type="password"]').type(password);
-  cy.pause();
   cy.get('button[class*="w-[436px] h-[40px] flex"]').click();
 });
 //

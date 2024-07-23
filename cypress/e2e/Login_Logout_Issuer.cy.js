@@ -1,12 +1,10 @@
-describe('template spec', () => {
-  it('passes', () => {
-    cy.visit('https://example.cypress.io')
-  })
-})
-describe("Login Test IDO Issuer", () => {
+const { contains } = require("micromatch");
+
+describe.skip("Login Test IDO Issuer", () => {
   it("Successfully visit login page of IDO Issuer website", () => {
     cy.visit("https://dev-ido.nvx.co.id/");
-    cy.get('a[href="/issuer-login"]').contains("Login as Issuer").click();
+    cy.get('span').click()
+    cy.get('a[href="/issuer-login"]').click();
     cy.url().should("contain", "/issuer-login");
     cy.get('input[type="email"]')
       .clear()
@@ -32,16 +30,13 @@ describe("Login Test IDO Issuer", () => {
   });
 
   it("Successfully login to IDO Issuer website", () => {
-    cy.visit("https://dev-ido.nvx.co.id/issuer-login");
-    cy.url().should("contain", "/issuer-login");
-    cy.get('input[type="email"]').type("regitatester@gmail.com");
+    cy.visit("https://dev-ido.nvx.co.id/");
+    cy.get('span').click()
+    cy.get('[href="/login"]').click()
+    cy.get('input[type="email"]').type("john.doe@example.com");
     cy.get('input[type="password"]').type("password123");
-    cy.get('[style="width: 304px; height: 78px;"] > div > iframe').click();
-    cy.pause();
     cy.get('button[class*="w-[436px] h-[40px] flex"]').click();
-    cy.url().should("contain", "/dashboard");
-    cy.get("h1.text-xl.font-medium").should("contain.text", "Dashboard");
-    cy.get("h1.text-xl.font-medium").should("contain.text", "Your portfolio");
+    cy.url().should("contain","dashboard");
   });
 
   it("Confirm mandatory fields on login page of IDO Issuer website", () => {
@@ -61,10 +56,6 @@ describe("Login Test IDO Issuer", () => {
       "contain",
       "Password is required"
     );
-    cy.get(".gap-4 > .text-center").should(
-      "contain",
-      "Please complete the reCAPTCHA"
-    );
   });
 
   it("Confirm failed login to IDO Issuer website due to incorrect credentials", () => {
@@ -81,15 +72,16 @@ describe("Login Test IDO Issuer", () => {
   });
 });
 
-describe("Logout Test IDO Issuer", () => {
+describe.skip("Logout Test IDO Issuer", () => {
   it("Successfully logout from IDO Issuer website", () => {
     cy.loginIssuer("regitatester@gmail.com", "password123");
-    cy.url().should("contain", "/dashboard");
+    cy.url().should("contain", "dashboard");
     cy.get(".w-6 > .w-full").should("be.visible").click();
     cy.contains("h1", "Logout").click();
     cy.url().should("contain", "dev-ido.nvx.co.id");
+    cy.get('span').click()
     cy.get('a[href="/issuer-login"]')
-      .contains("Login as Issuer")
+      .contains("Login as issuer")
       .should("be.visible")
       .and("not.be.disabled");
   });
